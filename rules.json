@@ -1,0 +1,1299 @@
+{
+  "version": 5,
+  "lure": [
+    {
+      "re": "disable\\s+(your\\s+)?antivirus",
+      "flags": "i",
+      "score": 35,
+      "label": "Disable antivirus instruction"
+    },
+    {
+      "re": "disable\\s+(your\\s+)?(real[- ]?time|windows\\s+defender)\\s+protection",
+      "flags": "i",
+      "score": 35,
+      "label": "Disable real-time protection instruction"
+    },
+    {
+      "re": "open\\s+powershell\\s+(from|in)\\s+(your\\s+)?(start|menu|terminal)",
+      "flags": "i",
+      "score": 40,
+      "label": "Open PowerShell from Start menu instruction"
+    },
+    {
+      "re": "paste\\s+(it\\s+)?into\\s+powershell",
+      "flags": "i",
+      "score": 40,
+      "label": "Paste into PowerShell instruction"
+    },
+    {
+      "re": "activation\\s+(link|script|code|token)\\s+(ready|available|generated)",
+      "flags": "i",
+      "score": 25,
+      "label": "Fake activation script ready"
+    },
+    {
+      "re": "(premium|pro|cracked|free)\\s*(activation|license|key)[\\s\\S]{0,100}?(powershell|terminal|cmd|command)",
+      "flags": "i",
+      "score": 40,
+      "label": "Fake software activation via command execution"
+    },
+    {
+      "re": "press.*hold.*windows.*key.*R|press.*hold.*the.*Windows.*Key",
+      "flags": "i",
+      "score": 45,
+      "label": "ClickFix: Win+R keyboard instruction pattern"
+    },
+    {
+      "re": "verification window.*Ctrl.*V|in the.*window.*press.*Ctrl.*V",
+      "flags": "i",
+      "score": 35,
+      "label": "ClickFix: paste-in-Run-dialog instruction"
+    },
+    {
+      "re": "press.*Enter.*on.*keyboard.*complete|press.*Enter.*to.*complete",
+      "flags": "i",
+      "score": 25,
+      "label": "ClickFix: Enter-to-complete instruction"
+    }
+  ],
+  "captcha": [
+    {
+      "re": "captcha-overlay[\\s\\S]{0,200}?iframe",
+      "flags": "i",
+      "score": 30,
+      "label": "Captcha overlay with iframe injection"
+    },
+    {
+      "re": "iframe[\\s\\S]{0,300}?captcha\\.html",
+      "flags": "i",
+      "score": 30,
+      "label": "Iframe loading captcha.html (fake CAPTCHA delivery)"
+    },
+    {
+      "re": "allow\\s*=\\s*['\"]clipboard-write['\"][\\s\\S]{0,200}?(captcha|verif|human)",
+      "flags": "i",
+      "score": 35,
+      "label": "Clipboard-write iframe tied to CAPTCHA flow"
+    }
+  ],
+  "fakeErr": [],
+  "fakeUpdate": [],
+  "srcdocIframe": [],
+  "base64Script": [],
+  "cfImpersonation": [
+    {
+      "re": "setAttribute\\s*\\(\\s*['\"]allow['\"]\\s*,\\s*['\"]clipboard-write['\"]",
+      "flags": "i",
+      "score": 35,
+      "label": "Dynamic iframe with clipboard-write permission grant"
+    },
+    {
+      "re": "cf-captcha-verified",
+      "flags": "i",
+      "score": 30,
+      "label": "Fake CF captcha verification postMessage handler"
+    },
+    {
+      "re": "cf_clearance['\"]?\\s*[=+]",
+      "flags": "i",
+      "score": 25,
+      "label": "Client-side cf_clearance cookie (real CF sets server-side)"
+    },
+    {
+      "re": "cfcw_captcha_page",
+      "flags": "i",
+      "score": 30,
+      "label": "CFCW fake captcha page URL pattern"
+    },
+    {
+      "re": "/plugins/CF/captcha\\.html",
+      "flags": "i",
+      "score": 35,
+      "label": "WP plugin fake CF captcha HTML path"
+    },
+    {
+      "re": "z-index\\s*[:=]\\s*['\"]?2147483647[\\s\\S]*?(width|height)\\s*[:=]\\s*['\"]?100%",
+      "flags": "i",
+      "score": 20,
+      "label": "Fullscreen max-z-index overlay (ClickFix delivery pattern)"
+    },
+    {
+      "re": "createElement\\s*\\(\\s*['\"]iframe['\"]\\s*\\)[\\s\\S]{0,500}?(width|height)\\s*[:=]\\s*['\"]?100%",
+      "flags": "i",
+      "score": 20,
+      "label": "Dynamic fullscreen iframe creation"
+    },
+    {
+      "re": "createElement\\s*\\(\\s*['\"]iframe['\"]\\s*\\)[\\s\\S]{0,500}?clipboard-write",
+      "flags": "i",
+      "score": 35,
+      "label": "Dynamic iframe requesting clipboard-write (ClickFix evasion)"
+    },
+    {
+      "re": "wp-content-manager-container",
+      "flags": "i",
+      "score": 20,
+      "label": "WP Content Manager malware kit container"
+    },
+    {
+      "re": "content_shown_count",
+      "flags": "i",
+      "score": 15,
+      "label": "Malware impression rate-limiting cookie"
+    },
+    {
+      "re": "content_user_id",
+      "flags": "i",
+      "score": 15,
+      "label": "Malware user tracking cookie"
+    },
+    {
+      "re": "postMessage[\\s\\S]{0,200}?(captcha|verif|clearance|human)",
+      "flags": "i",
+      "score": 20,
+      "label": "postMessage tied to fake verification flow"
+    },
+    {
+      "re": "document\\.cookie\\s*=\\s*['\"]cf_clearance",
+      "flags": "i",
+      "score": 30,
+      "label": "JS setting cf_clearance cookie (fake Cloudflare)"
+    },
+    {
+      "re": "overflow\\s*[:=]\\s*['\"]?hidden[\\s\\S]{0,300}?(captcha|verif|clearance|overlay)",
+      "flags": "i",
+      "score": 15,
+      "label": "Scroll lock tied to verification overlay"
+    },
+    {
+      "re": "document\\.documentElement\\.style\\.overflow\\s*=\\s*['\"]hidden",
+      "flags": "i",
+      "score": 15,
+      "label": "Document scroll lock (overlay takeover)"
+    },
+    {
+      "re": "instruction-modal|instruction-list",
+      "flags": "i",
+      "score": 25,
+      "label": "CF impersonation: instruction-modal structural pattern"
+    },
+    {
+      "re": "captcha-checkbox",
+      "flags": "i",
+      "score": 15,
+      "label": "CF impersonation: fake captcha-checkbox element"
+    },
+    {
+      "re": "I am not a robot.*Cloudflare ID|Cloudflare ID:\\s*[a-f0-9]",
+      "flags": "i",
+      "score": 35,
+      "label": "CF impersonation: fake Cloudflare agreement text"
+    },
+    {
+      "re": "perform.*steps.*above.*complete.*verification|complete.*steps.*above",
+      "flags": "i",
+      "score": 25,
+      "label": "CF impersonation: modal footer verification CTA"
+    },
+    {
+      "re": "__BW_MODE_RUN__|panelBaseUrl.*apiBase.*downloadUrl",
+      "flags": "i",
+      "score": 40,
+      "label": "BW panel ClickFix framework loader detected"
+    },
+    {
+      "re": "fetchPayload[\\s\\S]{0,500}?syncCfId|syncCfId[\\s\\S]{0,300}?agreement-text",
+      "flags": "i",
+      "score": 40,
+      "label": "CF ClickFix kit: payload fetch + agreement text sync"
+    },
+    {
+      "re": "step-num[\\s\\S]{0,200}?step-text[\\s\\S]{0,200}?win-key-icon",
+      "flags": "i",
+      "score": 30,
+      "label": "CF ClickFix kit: step numbering with Windows key icon"
+    },
+    {
+      "re": "verify-btn[\\s\\S]{0,300}?copyToClipboard|copyToClipboard[\\s\\S]{0,300}?verify-btn",
+      "flags": "i",
+      "score": 35,
+      "label": "CF ClickFix kit: verify button triggers clipboard copy"
+    }
+  ],
+  "clipboard": [
+    {
+      "re": "\\birm\\s+['\"]?https?://[^\\s]+\\s*\\|\\s*iex\\b",
+      "flags": "i",
+      "score": 95,
+      "label": "Standalone irm pipe to iex (download-and-execute)"
+    },
+    {
+      "re": "\\biwr\\s+['\"]?https?://[^\\s]+\\s*\\|\\s*iex\\b",
+      "flags": "i",
+      "score": 95,
+      "label": "Standalone iwr pipe to iex (download-and-execute)"
+    },
+    {
+      "re": "\\birm\\s+['\"]?https?://",
+      "flags": "i",
+      "score": 60,
+      "label": "Invoke-RestMethod URL fetch (irm)"
+    },
+    {
+      "re": "\\|\\s*iex\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "Pipe to Invoke-Expression (iex)"
+    },
+    {
+      "re": "powershell",
+      "flags": "i",
+      "score": 50,
+      "label": "PowerShell in clipboard"
+    },
+    {
+      "re": "mshta|certutil|bitsadmin|regsvr32",
+      "flags": "i",
+      "score": 50,
+      "label": "LOLBin in clipboard (built-in set)"
+    },
+    {
+      "re": "\\baddinutil(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "AddinUtil.exe LOLBin present"
+    },
+    {
+      "re": "addinutil(\\.exe)?[\\s\\S]*?\\.(dll|exe)\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "AddinUtil.exe loading assembly"
+    },
+    {
+      "re": "\\baspnet_compiler(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "Aspnet_Compiler.exe LOLBin present"
+    },
+    {
+      "re": "aspnet_compiler(\\.exe)?[\\s\\S]*?-[pv]\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Aspnet_Compiler.exe AWL bypass"
+    },
+    {
+      "re": "\\batbroker(\\.exe)?\\s+/start",
+      "flags": "i",
+      "score": 80,
+      "label": "Atbroker.exe proxy execution"
+    },
+    {
+      "re": "\\bbash(\\.exe)?\\s+-c\\b",
+      "flags": "i",
+      "score": 25,
+      "label": "bash.exe -c command execution"
+    },
+    {
+      "re": "bash(\\.exe)?[\\s\\S]*?(curl|wget|python)",
+      "flags": "i",
+      "score": 70,
+      "label": "bash.exe chaining download tool"
+    },
+    {
+      "re": "\\bcertoc(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "CertOC.exe LOLBin present"
+    },
+    {
+      "re": "certoc(\\.exe)?[\\s\\S]*?-LoadDLL",
+      "flags": "i",
+      "score": 85,
+      "label": "CertOC.exe DLL side-load"
+    },
+    {
+      "re": "\\bcertreq(\\.exe)?\\b[\\s\\S]*?-Post",
+      "flags": "i",
+      "score": 80,
+      "label": "CertReq.exe data exfil via POST"
+    },
+    {
+      "re": "certreq(\\.exe)?[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 75,
+      "label": "CertReq.exe remote transfer"
+    },
+    {
+      "re": "\\bcipher(\\.exe)?\\s+/w:",
+      "flags": "i",
+      "score": 70,
+      "label": "cipher.exe secure wipe (anti-forensics)"
+    },
+    {
+      "re": "\\bcmdkey(\\.exe)?\\s+/",
+      "flags": "i",
+      "score": 30,
+      "label": "cmdkey.exe credential access"
+    },
+    {
+      "re": "cmdkey(\\.exe)?[\\s\\S]*?(generic|add)",
+      "flags": "i",
+      "score": 75,
+      "label": "cmdkey.exe credential manipulation"
+    },
+    {
+      "re": "\\bcmdl32(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "cmdl32.exe LOLBin present"
+    },
+    {
+      "re": "cmdl32(\\.exe)?[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 80,
+      "label": "cmdl32.exe remote download"
+    },
+    {
+      "re": "\\bcmstp(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "CMSTP.exe LOLBin present"
+    },
+    {
+      "re": "cmstp(\\.exe)?[\\s\\S]*?/s[\\s\\S]*?\\.inf\\b",
+      "flags": "i",
+      "score": 90,
+      "label": "CMSTP.exe INF scriptlet execution"
+    },
+    {
+      "re": "cmstp(\\.exe)?[\\s\\S]*?/au\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "CMSTP.exe auto-install INF execution"
+    },
+    {
+      "re": "\\bcolorcpl(\\.exe)?\\b[\\s\\S]*?copy\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "colorcpl.exe file masquerade copy"
+    },
+    {
+      "re": "\\bcomputerdefaults(\\.exe)?\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "ComputerDefaults.exe UAC bypass"
+    },
+    {
+      "re": "\\bconfigsecuritypolicy(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "ConfigSecurityPolicy.exe LOLBin present"
+    },
+    {
+      "re": "configsecuritypolicy(\\.exe)?[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 80,
+      "label": "ConfigSecurityPolicy.exe remote transfer"
+    },
+    {
+      "re": "\\bcontrol(\\.exe)?\\s+\\S+\\.dll\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "control.exe loading DLL"
+    },
+    {
+      "re": "\\bcontrol(\\.exe)?\\s+\\S+\\.cpl\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "control.exe loading CPL"
+    },
+    {
+      "re": "\\bcsc(\\.exe)?\\s+/",
+      "flags": "i",
+      "score": 30,
+      "label": "csc.exe C# compiler invocation"
+    },
+    {
+      "re": "csc(\\.exe)?[\\s\\S]*?/out:",
+      "flags": "i",
+      "score": 75,
+      "label": "csc.exe compiling output binary"
+    },
+    {
+      "re": "\\bcustomshellhost(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "CustomShellHost.exe proxy execution"
+    },
+    {
+      "re": "\\bdatasvcutil(\\.exe)?\\b[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 80,
+      "label": "DataSvcUtil.exe data exfil"
+    },
+    {
+      "re": "\\bdevicecredentialdeployment(\\.exe)?\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "DeviceCredentialDeployment.exe concealment"
+    },
+    {
+      "re": "\\bdfsvc(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "Dfsvc.exe LOLBin present"
+    },
+    {
+      "re": "dfsvc(\\.exe)?[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 85,
+      "label": "Dfsvc.exe ClickOnce remote exec"
+    },
+    {
+      "re": "\\bdiskshadow(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "Diskshadow.exe LOLBin present"
+    },
+    {
+      "re": "diskshadow(\\.exe)?[\\s\\S]*?exec\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "Diskshadow.exe command execution"
+    },
+    {
+      "re": "diskshadow(\\.exe)?[\\s\\S]*?ntds",
+      "flags": "i",
+      "score": 90,
+      "label": "Diskshadow.exe NTDS dump"
+    },
+    {
+      "re": "\\bdnscmd(\\.exe)?\\b[\\s\\S]*?/config",
+      "flags": "i",
+      "score": 85,
+      "label": "Dnscmd.exe DLL injection via config"
+    },
+    {
+      "re": "\\beudcedit(\\.exe)?\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "Eudcedit.exe UAC bypass"
+    },
+    {
+      "re": "\\beventvwr(\\.exe)?\\b[\\s\\S]*?mmc",
+      "flags": "i",
+      "score": 75,
+      "label": "Eventvwr.exe UAC bypass"
+    },
+    {
+      "re": "\\bextexport(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Extexport.exe DLL side-load"
+    },
+    {
+      "re": "\\bextrac32(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "Extrac32.exe LOLBin present"
+    },
+    {
+      "re": "extrac32(\\.exe)?[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 80,
+      "label": "Extrac32.exe remote file extraction"
+    },
+    {
+      "re": "\\bfltmc(\\.exe)?\\s+unload\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "fltMC.exe security filter unload"
+    },
+    {
+      "re": "\\bforfiles(\\.exe)?\\b[\\s\\S]*?/c\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Forfiles.exe indirect command execution"
+    },
+    {
+      "re": "forfiles(\\.exe)?[\\s\\S]*?/p[\\s\\S]*?/c[\\s\\S]*?cmd",
+      "flags": "i",
+      "score": 85,
+      "label": "Forfiles.exe cmd execution pattern"
+    },
+    {
+      "re": "\\bfsutil(\\.exe)?\\b[\\s\\S]*?deletejournal",
+      "flags": "i",
+      "score": 80,
+      "label": "Fsutil.exe USN journal tamper"
+    },
+    {
+      "re": "\\bftp(\\.exe)?\\s+-s:",
+      "flags": "i",
+      "score": 80,
+      "label": "ftp.exe scripted execution"
+    },
+    {
+      "re": "\\bgpscript(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Gpscript.exe GPO script execution"
+    },
+    {
+      "re": "\\bhh(\\.exe)?\\b[\\s\\S]*?\\.chm\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "hh.exe compiled HTML help execution"
+    },
+    {
+      "re": "hh(\\.exe)?[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 85,
+      "label": "hh.exe remote CHM execution"
+    },
+    {
+      "re": "\\bie4uinit(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Ie4uinit.exe INF-based execution"
+    },
+    {
+      "re": "\\biediagcmd(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "iediagcmd.exe proxy execution"
+    },
+    {
+      "re": "\\bieexec(\\.exe)?\\b[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 90,
+      "label": "Ieexec.exe remote .NET binary execution"
+    },
+    {
+      "re": "\\bilasm(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "Ilasm.exe IL assembler present"
+    },
+    {
+      "re": "ilasm(\\.exe)?[\\s\\S]*?/out:",
+      "flags": "i",
+      "score": 75,
+      "label": "Ilasm.exe compiling IL assembly"
+    },
+    {
+      "re": "\\binfdefaultinstall(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Infdefaultinstall.exe INF execution"
+    },
+    {
+      "re": "\\biscsicpl(\\.exe)?\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "iscsicpl.exe UAC bypass"
+    },
+    {
+      "re": "\\bjsc(\\.exe)?\\b[\\s\\S]*?/out:",
+      "flags": "i",
+      "score": 75,
+      "label": "Jsc.exe JScript compilation"
+    },
+    {
+      "re": "\\bmakecab(\\.exe)?\\b[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 80,
+      "label": "Makecab.exe remote file access"
+    },
+    {
+      "re": "\\bmavinject(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "Mavinject.exe LOLBin present"
+    },
+    {
+      "re": "mavinject(\\.exe)?[\\s\\S]*?/INJECTRUNNING",
+      "flags": "i",
+      "score": 90,
+      "label": "Mavinject.exe DLL injection into process"
+    },
+    {
+      "re": "\\bmicrosoft\\.workflow\\.compiler(\\.exe)?\\b",
+      "flags": "i",
+      "score": 90,
+      "label": "Microsoft.Workflow.Compiler.exe code execution"
+    },
+    {
+      "re": "\\bmmc(\\.exe)?\\b[\\s\\S]*?-Embedding",
+      "flags": "i",
+      "score": 75,
+      "label": "MMC.exe COM-based execution"
+    },
+    {
+      "re": "\\bmpcmdrun(\\.exe)?\\b[\\s\\S]*?-DownloadFile",
+      "flags": "i",
+      "score": 85,
+      "label": "MpCmdRun.exe (Defender) file download"
+    },
+    {
+      "re": "\\bmsconfig(\\.exe)?\\b[\\s\\S]*?-5\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Msconfig.exe command execution"
+    },
+    {
+      "re": "\\bmsdt(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "MSDT.exe LOLBin present"
+    },
+    {
+      "re": "msdt(\\.exe)?[\\s\\S]*?ms-msdt:",
+      "flags": "i",
+      "score": 90,
+      "label": "MSDT.exe protocol handler exploitation"
+    },
+    {
+      "re": "msdt(\\.exe)?[\\s\\S]*?/id\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "MSDT.exe diagnostic tool abuse"
+    },
+    {
+      "re": "\\bmsedge(\\.exe)?\\b[\\s\\S]*?--disable-gpu-sandbox",
+      "flags": "i",
+      "score": 80,
+      "label": "msedge.exe sandbox escape flag"
+    },
+    {
+      "re": "msedge(\\.exe)?[\\s\\S]*?--renderer-cmd-prefix",
+      "flags": "i",
+      "score": 85,
+      "label": "msedge.exe renderer command prefix abuse"
+    },
+    {
+      "re": "\\bodbcconf(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "Odbcconf.exe LOLBin present"
+    },
+    {
+      "re": "odbcconf(\\.exe)?[\\s\\S]*?/a\\b[\\s\\S]*?regsvr",
+      "flags": "i",
+      "score": 90,
+      "label": "Odbcconf.exe DLL registration execution"
+    },
+    {
+      "re": "odbcconf(\\.exe)?[\\s\\S]*?-f\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Odbcconf.exe response file execution"
+    },
+    {
+      "re": "\\bofflinescannershell(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "OfflineScannerShell.exe DLL side-load"
+    },
+    {
+      "re": "\\bpcalua(\\.exe)?\\b[\\s\\S]*?-a\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "Pcalua.exe program compatibility execution"
+    },
+    {
+      "re": "\\bpcwrun(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Pcwrun.exe proxy execution"
+    },
+    {
+      "re": "\\bpnputil(\\.exe)?\\b[\\s\\S]*?/add-driver",
+      "flags": "i",
+      "score": 80,
+      "label": "Pnputil.exe driver installation"
+    },
+    {
+      "re": "\\bpresentationhost(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Presentationhost.exe XBAP execution"
+    },
+    {
+      "re": "\\bprovlaunch(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Provlaunch.exe proxy execution"
+    },
+    {
+      "re": "\\bpsr(\\.exe)?\\s+/start",
+      "flags": "i",
+      "score": 70,
+      "label": "Psr.exe screen recording reconnaissance"
+    },
+    {
+      "re": "\\brasautou(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Rasautou.exe DLL side-load"
+    },
+    {
+      "re": "\\brdrleakdiag(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "rdrleakdiag.exe memory dump"
+    },
+    {
+      "re": "\\breg(\\.exe)?\\s+(save|export)[\\s\\S]*?(sam|system|security)\\b",
+      "flags": "i",
+      "score": 90,
+      "label": "reg.exe SAM/SYSTEM hive dump"
+    },
+    {
+      "re": "\\breg(\\.exe)?\\s+add[\\s\\S]*?\\\\run\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "reg.exe Run key persistence"
+    },
+    {
+      "re": "\\bregasm(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "Regasm.exe LOLBin present"
+    },
+    {
+      "re": "regasm(\\.exe)?[\\s\\S]*?\\.dll\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Regasm.exe .NET DLL execution"
+    },
+    {
+      "re": "\\bregister-cimprovider(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Register-cimprovider.exe DLL execution"
+    },
+    {
+      "re": "\\bregsvcs(\\.exe)?\\b",
+      "flags": "i",
+      "score": 30,
+      "label": "Regsvcs.exe LOLBin present"
+    },
+    {
+      "re": "regsvcs(\\.exe)?[\\s\\S]*?\\.dll\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Regsvcs.exe .NET DLL execution"
+    },
+    {
+      "re": "\\breplace(\\.exe)?\\b[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 75,
+      "label": "Replace.exe remote file copy"
+    },
+    {
+      "re": "\\brpcping(\\.exe)?\\b[\\s\\S]*?-u\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Rpcping.exe credential capture"
+    },
+    {
+      "re": "\\brunexehelper(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Runexehelper.exe proxy execution"
+    },
+    {
+      "re": "\\brunonce(\\.exe)?\\s+/",
+      "flags": "i",
+      "score": 75,
+      "label": "Runonce.exe command execution"
+    },
+    {
+      "re": "\\brunscripthelper(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Runscripthelper.exe PowerShell execution"
+    },
+    {
+      "re": "\\bschtasks(\\.exe)?\\b[\\s\\S]*?/create\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "schtasks.exe scheduled task creation"
+    },
+    {
+      "re": "schtasks(\\.exe)?[\\s\\S]*?/create[\\s\\S]*?/tr\\b[\\s\\S]*?(cmd|powershell|mshta|wscript)",
+      "flags": "i",
+      "score": 90,
+      "label": "schtasks.exe creating task with suspicious command"
+    },
+    {
+      "re": "\\bscriptrunner(\\.exe)?\\b[\\s\\S]*?-appvscript",
+      "flags": "i",
+      "score": 85,
+      "label": "Scriptrunner.exe App-V script execution"
+    },
+    {
+      "re": "\\bsettingsynchost(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "SettingSyncHost.exe proxy execution"
+    },
+    {
+      "re": "\\bsftp(\\.exe)?\\b[\\s\\S]*?-D\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "Sftp.exe command execution"
+    },
+    {
+      "re": "\\bstordiag(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Stordiag.exe proxy execution"
+    },
+    {
+      "re": "\\bttdinject(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Ttdinject.exe proxy execution"
+    },
+    {
+      "re": "\\btttracer(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Tttracer.exe proxy execution / memory dump"
+    },
+    {
+      "re": "\\bunregmp2(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Unregmp2.exe indirect command execution"
+    },
+    {
+      "re": "\\bvbc(\\.exe)?\\b[\\s\\S]*?/out:",
+      "flags": "i",
+      "score": 75,
+      "label": "vbc.exe VB.NET compilation"
+    },
+    {
+      "re": "\\bverclsid(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Verclsid.exe COM object execution"
+    },
+    {
+      "re": "\\bwab(\\.exe)?\\b[\\s\\S]*?\\.dll\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Wab.exe DLL side-load"
+    },
+    {
+      "re": "\\bwlrmdr(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Wlrmdr.exe indirect command execution"
+    },
+    {
+      "re": "\\bworkfolders(\\.exe)?\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "WorkFolders.exe proxy execution"
+    },
+    {
+      "re": "\\bwsreset(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Wsreset.exe UAC bypass"
+    },
+    {
+      "re": "\\bwuauclt(\\.exe)?\\b[\\s\\S]*?/UpdateDeploymentProvider",
+      "flags": "i",
+      "score": 85,
+      "label": "wuauclt.exe DLL loading via UpdateDeploymentProvider"
+    },
+    {
+      "re": "\\bxwizard(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Xwizard.exe COM execution"
+    },
+    {
+      "re": "\\bmsedge_proxy(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "msedge_proxy.exe LOLBin execution"
+    },
+    {
+      "re": "\\bmsedgewebview2(\\.exe)?\\b[\\s\\S]*?--disable",
+      "flags": "i",
+      "score": 80,
+      "label": "msedgewebview2.exe sandbox disable abuse"
+    },
+    {
+      "re": "\\bodbcad32(\\.exe)?\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "odbcad32.exe UAC bypass"
+    },
+    {
+      "re": "\\bwrite(\\.exe)?\\b[\\s\\S]*?\\.(exe|dll)\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "write.exe proxy execution with binary"
+    },
+    {
+      "re": "\\bwt(\\.exe)?\\b[\\s\\S]*?cmd[\\s\\S]*?/c\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "wt.exe launching cmd /c"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?advpack(\\.dll)?[\\s\\S]*?RegisterOCX",
+      "flags": "i",
+      "score": 90,
+      "label": "Advpack.dll RegisterOCX execution via rundll32"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?advpack(\\.dll)?[\\s\\S]*?LaunchINFSection",
+      "flags": "i",
+      "score": 90,
+      "label": "Advpack.dll LaunchINFSection execution"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?ieadvpack(\\.dll)?",
+      "flags": "i",
+      "score": 85,
+      "label": "Ieadvpack.dll execution via rundll32"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?pcwutl(\\.dll)?",
+      "flags": "i",
+      "score": 80,
+      "label": "Pcwutl.dll execution via rundll32"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?scrobj(\\.dll)?[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 90,
+      "label": "Scrobj.dll remote scriptlet via rundll32"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?shdocvw(\\.dll)?",
+      "flags": "i",
+      "score": 80,
+      "label": "Shdocvw.dll URL execution via rundll32"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?comsvcs(\\.dll)?[\\s\\S]*?MiniDump",
+      "flags": "i",
+      "score": 95,
+      "label": "Comsvcs.dll MiniDump (LSASS dump)"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?comsvcs(\\.dll)?[\\s\\S]*?#24",
+      "flags": "i",
+      "score": 95,
+      "label": "Comsvcs.dll ordinal #24 LSASS dump"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?desk(\\.cpl)?[\\s\\S]*?InstallScreenSaver",
+      "flags": "i",
+      "score": 80,
+      "label": "Desk.cpl InstallScreenSaver execution"
+    },
+    {
+      "re": "rundll32(\\.exe)?[\\s\\S]*?dfshim(\\.dll)?",
+      "flags": "i",
+      "score": 80,
+      "label": "Dfshim.dll ClickOnce execution via rundll32"
+    },
+    {
+      "re": "\\baccheckconsole(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "AccCheckConsole.exe .NET DLL execution"
+    },
+    {
+      "re": "\\badplus(\\.exe)?\\b[\\s\\S]*?-crash",
+      "flags": "i",
+      "score": 80,
+      "label": "adplus.exe memory dump tool"
+    },
+    {
+      "re": "\\bagentexecutor(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "AgentExecutor.exe execution"
+    },
+    {
+      "re": "\\bappcert(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "AppCert.exe execution"
+    },
+    {
+      "re": "\\bappvlp(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Appvlp.exe App-V proxy execution"
+    },
+    {
+      "re": "\\bbcp(\\.exe)?\\b[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 80,
+      "label": "Bcp.exe remote download"
+    },
+    {
+      "re": "\\bbginfo(\\.exe)?\\b[\\s\\S]*?\\.bgi\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Bginfo.exe script execution"
+    },
+    {
+      "re": "\\bcdb(\\.exe)?\\b[\\s\\S]*?-c\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "Cdb.exe debugger command execution"
+    },
+    {
+      "re": "\\bcoregen(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "coregen.exe DLL injection"
+    },
+    {
+      "re": "\\bcreatedump(\\.exe)?\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "Createdump.exe memory dump"
+    },
+    {
+      "re": "\\bcsi(\\.exe)?\\b[\\s\\S]*?\\.csx\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "csi.exe C# script execution"
+    },
+    {
+      "re": "\\bdefaultpack(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "DefaultPack.exe command execution"
+    },
+    {
+      "re": "\\bdevinit(\\.exe)?\\b[\\s\\S]*?msi-install",
+      "flags": "i",
+      "score": 80,
+      "label": "Devinit.exe MSI remote install"
+    },
+    {
+      "re": "\\bdnx(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "dnx.exe .NET execution environment"
+    },
+    {
+      "re": "\\bfsi(\\.exe)?\\b[\\s\\S]*?\\.fsx\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "Fsi.exe F# script execution"
+    },
+    {
+      "re": "\\bfsianycpu(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "FsiAnyCpu.exe F# script execution"
+    },
+    {
+      "re": "\\bintellitrace(\\.exe)?\\b[\\s\\S]*?launch\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "IntelliTrace.exe proxy execution"
+    },
+    {
+      "re": "\\bmsdeploy(\\.exe)?\\b[\\s\\S]*?-verb:",
+      "flags": "i",
+      "score": 80,
+      "label": "Msdeploy.exe command execution"
+    },
+    {
+      "re": "\\bmsxsl(\\.exe)?\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "msxsl.exe XSL script execution"
+    },
+    {
+      "re": "msxsl(\\.exe)?[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 90,
+      "label": "msxsl.exe remote XSL execution"
+    },
+    {
+      "re": "\\bntsd(\\.exe)?\\b[\\s\\S]*?-c\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "Ntsd.exe debugger command execution"
+    },
+    {
+      "re": "\\bprocdump(\\.exe)?\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "Procdump.exe process dump"
+    },
+    {
+      "re": "procdump(\\.exe)?[\\s\\S]*?lsass",
+      "flags": "i",
+      "score": 95,
+      "label": "Procdump.exe LSASS dump"
+    },
+    {
+      "re": "\\bprotocolhandler(\\.exe)?\\b[\\s\\S]*?https?://",
+      "flags": "i",
+      "score": 75,
+      "label": "ProtocolHandler.exe remote download"
+    },
+    {
+      "re": "\\brcsi(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "rcsi.exe C# script execution"
+    },
+    {
+      "re": "\\bremote(\\.exe)?\\s+/s\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Remote.exe server mode execution"
+    },
+    {
+      "re": "\\bsqldumper(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Sqldumper.exe memory dump"
+    },
+    {
+      "re": "sqldumper(\\.exe)?[\\s\\S]*?lsass",
+      "flags": "i",
+      "score": 95,
+      "label": "Sqldumper.exe LSASS dump"
+    },
+    {
+      "re": "\\bsqlps(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Sqlps.exe PowerShell execution"
+    },
+    {
+      "re": "\\bsqltoolsps(\\.exe)?\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "SQLToolsPS.exe PowerShell execution"
+    },
+    {
+      "re": "\\bsquirrel(\\.exe)?\\b[\\s\\S]*?--download",
+      "flags": "i",
+      "score": 80,
+      "label": "Squirrel.exe remote download/update"
+    },
+    {
+      "re": "\\bte(\\.exe)?\\b[\\s\\S]*?\\.wsc\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "te.exe WSC script execution"
+    },
+    {
+      "re": "\\btracker(\\.exe)?\\b[\\s\\S]*?/c\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Tracker.exe command execution"
+    },
+    {
+      "re": "\\bvsdiagnostics(\\.exe)?\\b[\\s\\S]*?start\\b",
+      "flags": "i",
+      "score": 70,
+      "label": "VSDiagnostics.exe proxy execution"
+    },
+    {
+      "re": "\\bvsiisexelauncher(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "VSIISExeLauncher.exe proxy execution"
+    },
+    {
+      "re": "\\bvisualuiaverifynative(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "VisualUiaVerifyNative.exe .NET execution"
+    },
+    {
+      "re": "\\bvslaunchbrowser(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "VSLaunchBrowser.exe remote execution"
+    },
+    {
+      "re": "\\bvshadow(\\.exe)?\\b[\\s\\S]*?-exec",
+      "flags": "i",
+      "score": 80,
+      "label": "Vshadow.exe proxy execution"
+    },
+    {
+      "re": "\\bwsl(\\.exe)?\\b[\\s\\S]*?(bash|sh|python|curl|wget)",
+      "flags": "i",
+      "score": 80,
+      "label": "WSL.exe executing Linux command"
+    },
+    {
+      "re": "\\bvsls-agent(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "vsls-agent.exe DLL side-load"
+    },
+    {
+      "re": "\\bvstest\\.console(\\.exe)?\\b",
+      "flags": "i",
+      "score": 75,
+      "label": "vstest.console.exe DLL execution"
+    },
+    {
+      "re": "\\bcl_loadassembly\\.ps1\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "CL_LoadAssembly.ps1 .NET script execution"
+    },
+    {
+      "re": "\\bcl_mutexverifiers\\.ps1\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "CL_Mutexverifiers.ps1 script execution"
+    },
+    {
+      "re": "\\bcl_invocation\\.ps1\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "CL_Invocation.ps1 command execution"
+    },
+    {
+      "re": "\\bmanage-bde\\.wsf\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "Manage-bde.wsf script proxy execution"
+    },
+    {
+      "re": "\\butilityfunctions\\.ps1\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "UtilityFunctions.ps1 .NET script execution"
+    },
+    {
+      "re": "\\bwinrm\\.vbs\\b",
+      "flags": "i",
+      "score": 80,
+      "label": "winrm.vbs script execution"
+    },
+    {
+      "re": "\\bpester\\.bat\\b[\\s\\S]*?-Payload\\b",
+      "flags": "i",
+      "score": 85,
+      "label": "Pester.bat payload execution"
+    }
+  ]
+}

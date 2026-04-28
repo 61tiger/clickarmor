@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "description": "Remote whitelist \u2014 domains that should never trigger ClickArmor detection",
+  "domains": []
+}

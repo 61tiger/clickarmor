@@ -1,0 +1,83 @@
+/* banner.css — shadow DOM styles for preemptive banner */
+.cg-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2147483647;
+  background: #ffefb5;
+  color: #1d1d1d;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  box-shadow: 0 6px 24px rgba(0,0,0,.12);
+  animation: cgSlide .22s ease-out;
+}
+
+@keyframes cgSlide {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+.cg-banner__inner {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+}
+
+.cg-banner__msg {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.cg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.cg-banner__actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.cg-btn {
+  border: 1px solid rgba(0,0,0,.18);
+  background: rgba(255,255,255,.65);
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.cg-btn:hover { background: rgba(255,255,255,.9); }
+
+.cg-btn--ghost { background: transparent; }
+
+.cg-banner__more {
+  padding: 0 12px 12px;
+}
+
+.cg-more-title {
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.cg-more-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 12px;
+}
+
+.cg-more-note {
+  margin-top: 8px;
+  font-size: 11px;
+  color: rgba(0,0,0,.7);
+}

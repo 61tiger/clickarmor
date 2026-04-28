@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ClickArmor V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="hdr">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <div class="name">ClickArmor V2</div>
+          <div class="ver">Detection Engine V2</div>
+        </div>
+      </div>
+      <label class="toggle">
+        <input type="checkbox" id="enabled">
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="k">Blocked</div>
+        <div class="v" id="blocked">0</div>
+      </div>
+      <div class="stat">
+        <div class="k">Scanned</div>
+        <div class="v" id="scanned">0</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-h">
+        <div class="title">Recent detections</div>
+        <button class="link" id="clearLog">Clear</button>
+      </div>
+      <div id="log" class="log"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-h">
+        <div class="title">Whitelist</div>
+      </div>
+      <div class="wl-add">
+        <input type="text" id="wlInput" class="wl-input" placeholder="e.g. youtube.com" spellcheck="false">
+        <button class="wl-add-btn" id="wlAdd">Add</button>
+      </div>
+      <div class="wl-current-btn-row">
+        <button class="link" id="wlAddCurrent">+ Whitelist current site</button>
+      </div>
+      <div id="whitelist" class="list"></div>
+      <div class="hint">Whitelisted domains bypass all scanning and hooks entirely.</div>
+    </section>
+
+    <section class="card">
+      <div class="card-h">
+        <div class="title">Blocklist</div>
+      </div>
+      <div class="wl-add">
+        <input type="text" id="blInput" class="wl-input" placeholder="e.g. malicious-site.com" spellcheck="false">
+        <button class="wl-add-btn" id="blAdd">Add</button>
+      </div>
+      <div class="wl-current-btn-row">
+        <button class="link" id="blAddCurrent">+ Blocklist current site</button>
+      </div>
+      <div id="blocklist" class="list"></div>
+      <div class="hint">Blocklisted domains will trigger a warning banner on visit.</div>
+    </section>
+
+    <section class="card">
+      <div class="card-h">
+        <div class="title">Sensitive Form Detection</div>
+      </div>
+      <div class="hint">Built-in. Warns on password, MFA, SSN, banking, card, and brand-impersonation form lures.</div>
+    </section>
+
+    <footer class="foot">
+      <span>100% local &bull; Open source &bull; ClickArmor</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

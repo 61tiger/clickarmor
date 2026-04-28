@@ -1,0 +1,67 @@
+{
+  "manifest_version": 3,
+  "name": "ClickArmor",
+  "version": "2.0.0",
+  "description": "ClickArmor blocks ClickFix, phishing, brand impersonation, clipboard abuse, and AiTM threats locally.",
+  "permissions": [
+    "storage",
+    "clipboardRead",
+    "clipboardWrite",
+    "activeTab",
+    "tabs",
+    "alarms"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "ClickArmor V2",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "clipboard-hook-early.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "page-analyzer.js",
+        "form-detector.js",
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "rules.json",
+        "whitelist.json"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
